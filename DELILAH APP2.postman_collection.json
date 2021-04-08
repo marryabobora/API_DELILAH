@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "4c4afb98-4a3e-41c9-819f-446c96af3582",
+		"name": "DELILAH APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Crear User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/users/create?username=admin&password=Password123",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"create"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "Password123"
+								}
+							]
+						},
+						"description": "Nota: si se crea un usuario de nombre 'admin' sera promocionado automaticamente."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/users/{{id}}/?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"{{id}}",
+								""
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Ordenes de User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/users/{{id}}/orders?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"{{id}}",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\" : {\r\n        \"userFirstName\": \"Marry\",\r\n        \"userLastName\": \"Vieira\",\r\n        \"email\": \"marrypinhovieira@gmail.com\",\r\n        \"phone\": \"1234\",\r\n        \"address\": \"Direccion 1234\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{path}}:3000/users/{{id}}/update?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"{{id}}",
+								"update"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Promocionar User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{path}}:3000/users/{{id}}/promote?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"{{id}}",
+								"promote"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/users/{{id2}}/delete?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"{{id2}}",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Platos",
+			"item": [
+				{
+					"name": "Ver todos los Platos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/dishes/",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"dishes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Plato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/dishes/create?token={{adminToken}}&name=Fideos&price=120",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"dishes",
+								"create"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								},
+								{
+									"key": "name",
+									"value": "Fideos"
+								},
+								{
+									"key": "price",
+									"value": "120"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Plato",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/dishes/{{dishId}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"dishes",
+								"{{dishId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Plato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/dishes/{{dishId}}/update?token={{adminToken}}&name=Ravioles&price=150",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"dishes",
+								"{{dishId}}",
+								"update"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								},
+								{
+									"key": "name",
+									"value": "Ravioles"
+								},
+								{
+									"key": "price",
+									"value": "150"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Plato",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/dishes/{{dishId}}/delete?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"dishes",
+								"{{dishId}}",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ordenes",
+			"item": [
+				{
+					"name": "Ver todas las Ordenes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/orders/?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Orden",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dishIds\" : [ \"{{dishId}}\" ]\r\n}"
+						},
+						"url": {
+							"raw": "{{path}}:3000/orders/create?userId={{id}}&token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"create"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{id}}"
+								},
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Orden",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/orders/{{orderId}}/?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"{{orderId}}",
+								""
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Orden",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dishIds\" : [ \"{{dishId}}\" ],\r\n    \"state\" : 2\r\n}"
+						},
+						"url": {
+							"raw": "{{path}}:3000/orders/{{orderId}}/update?token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"{{orderId}}",
+								"update"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						},
+						"description": "Nota : Es necesario un token de administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Orden",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{path}}:3000/orders/{{orderId}}/delete?userId={{id}}&token={{adminToken}}",
+							"host": [
+								"{{path}}"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"{{orderId}}",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{id}}"
+								},
+								{
+									"key": "token",
+									"value": "{{adminToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ver status (Empezar aqui)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{path}}:3000/",
+					"host": [
+						"{{path}}"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{path}}:3000/login?username=admin&password=Password123",
+					"host": [
+						"{{path}}"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "password",
+							"value": "Password123"
+						}
+					]
+				},
+				"description": "Login con usuario previamente creado, devuelve el id del usuario y el token de acceso.\r\n\r\nNota: en todos los casos donde se requiera un token, este debe ser el token del usuario que se referencia (como por ej. si se quiere ver una orden, el token debe ser del usuario que creó la orden). Los token de usuarios promocionados son universales, y pueden ser usados para todo."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "path",
+			"value": "localhost"
+		},
+		{
+			"key": "adminToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjRmYTQzM2NkNGVkMWM2YzQ1MWM2NyIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2MTcyMzA0MzV9.a1SxNT8..."
+		},
+		{
+			"key": "id",
+			"value": "6064fa433cd4ed1c6c451c67"
+		},
+		{
+			"key": "id2",
+			"value": "606509b784fcd205ccb030b9"
+		},
+		{
+			"key": "dishId",
+			"value": "60650e06503f7210d4ab3fa5"
+		},
+		{
+			"key": "orderId",
+			"value": "606516bc81ba3d17943c6ca1"
+		}
+	]
+}
