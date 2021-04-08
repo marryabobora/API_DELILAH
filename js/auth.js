@@ -1,64 +1,66 @@
+const { MongoClient } = require('mongodb');
+
 module.exports = {
-    IsUserOrAdminToken : async function(collection, id, token) {
+    IsUserOrAdminToken: async function(collection, id, token) {
         var jwt = require('jsonwebtoken');
         var obj = jwt.decode(token);
 
-        var user = await collection.findOne({ _id : obj.id, username : obj.username });
+        console.log("Decripted token: " + token);
+        console.log(JSON.stringify(obj));
 
-        if(user) {
+        var user = await collection.findOne({ _id: obj.id, username: obj.username });
+
+        if (user) {
             try {
                 verify(token, user.jwtSecret);
 
                 return user.isAdmin || obj.id == id;
-            } catch(err) {
+            } catch (err) {
                 return false;
             }
-        }
-        else return false;
+        } else return false;
     },
-    IsAdminToken : async function(collection, token) {
+    IsAdminToken: async function(collection, token) {
         var jwt = require('jsonwebtoken');
         var obj = jwt.decode(token);
 
-        var user = await collection.findOne({ _id : obj.id, username : obj.username });
+        var user = await collection.findOne({ _id: obj.id, username: obj.username });
 
-        if(user) {
+        if (user) {
             try {
                 jwt.verify(token, user.jwtSecret);
 
                 return user.isAdmin;
-            } catch(err) {
+            } catch (err) {
                 return false;
             }
-        }
-        else return false;
+        } else return false;
     },
-    MakeAdmin : async function(collection, id) {
-        var user = await collection.findOneAndUpdate( { _id : id }, { $set : { isAdmin : true }});
+    MakeAdmin: async function(collection, id) {
+        var user = await collection.findOneAndUpdate({ _id: id }, { $set: { isAdmin: true } });
 
         return user;
     },
-    GetAccessToken : async function(collection, username, password) {
-        var user = await collection.findOne({ username : username, password : password });
+    GetAccessToken: async function(collection, username, password) {
+        var user = await collection.findOne({ username: username, password: password });
 
-        if(!user) {
+        if (!user) {
             let errMsg = "User doesn't exist!";
-            console.log( errMsg );
-            
+            console.log(errMsg);
+
             return null;
-        }
-        else {
-            if(user.accessToken == null) {
+        } else {
+            if (user.accessToken == null) {
                 user = this.GenerateAccessToken(user);
-                await collection.findOneAndUpdate({ _id : user._id }, { $set : user});
+                await collection.findOneAndUpdate({ _id: user._id }, { $set: user });
             }
 
             return user.accessToken;
         }
     },
-    GenerateAccessToken : function(user) {
+    GenerateAccessToken: function(user) {
         var jwt = require('jsonwebtoken');
-        user.accessToken = jwt.sign({ id : user._id, username : user.username }, user.jwtSecret);
+        user.accessToken = jwt.sign({ id: user._id, username: user.username }, user.jwtSecret);
 
         return user;
     }
